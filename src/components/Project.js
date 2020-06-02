@@ -12,7 +12,10 @@ const Project = ({ item, ...props }) => {
 	const [fallback, setFallback] = useState(true);
 	// eslint-disable-next-line
 	const handleToggle = useCallback(() => setToggle(!toggle), [toggle]);
-	const _onSrcError = useCallback(() => setFallback(false), []);
+	const _onSrcError = useCallback(() => {
+		setFallback(false);
+		console.log(item.image?.url);
+	}, []);
 	const { opacity } = useSpring({
 		from: { opacity: 0 },
 		opacity: toggle ? 1 : 0,
