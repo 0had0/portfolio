@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "gestalt";
+import ColoredBox from "./ColoredBox";
 
 function Project({
 	big,
@@ -11,7 +11,7 @@ function Project({
 }) {
 	return (
 		<div onMouseLeave={onMouseLeave} onMouseEnter={onMouseEnter}>
-			<Box
+			<ColoredBox
 				width={
 					window.innerWidth <= 430
 						? "65vmin"
@@ -31,7 +31,7 @@ function Project({
 				color={color ? color : "blue"}
 			>
 				{children}
-			</Box>
+			</ColoredBox>
 		</div>
 	);
 }

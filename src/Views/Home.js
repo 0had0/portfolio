@@ -11,7 +11,7 @@ import me from "../images/me.jpg";
 import me2 from "../images/0had0.svg";
 
 function useFetch(url) {
-	const [data, setData] = useState([]);
+	const [data, setData] = useState([{}, {}, {}]);
 	useEffect(() => {
 		let isMounted = true;
 		async function getData() {
@@ -142,20 +142,7 @@ function Home() {
 					</Box>
 					{projects &&
 						projects.map((item, i) => (
-							<Project
-								key={i}
-								item={item}
-								big={i === 0}
-								color={
-									i === 0
-										? "darkGray"
-										: i === 1
-										? "white"
-										: i === 2
-										? "purple"
-										: "white"
-								}
-							/>
+							<Project key={i} item={item} big={i === 0} />
 						))}
 				</Box>
 			</ColoredBox>

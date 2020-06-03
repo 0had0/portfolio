@@ -132,7 +132,7 @@ function BlogItem() {
 			</div>
 			<ColoredBox
 				width="100%"
-				minHeight="100vh"
+				minHeight="150vh"
 				display="flex"
 				direction="column"
 				alignItems="center"
@@ -227,7 +227,7 @@ function BlogItem() {
 				alignItems="center"
 				direction="column"
 				justifyContent="center"
-				padding={10}
+				padding={5}
 			>
 				<ColoredBox
 					dark
@@ -353,18 +353,22 @@ function BlogItem() {
 					)}
 				</ColoredBox>
 			</ColoredBox>
-			<form onSubmit={handleSubmitComment} style={{ width: "100%" }}>
+			<form
+				onSubmit={handleSubmitComment}
+				style={{ width: "100%", height: "60vh" }}
+			>
 				<ColoredBox
 					dark
 					width="100%"
-					padding={5}
+					height="100%"
+					padding={1}
 					display="flex"
 					direction="column"
 					alignItems="center"
 					justifyContent="center"
 				>
 					<Box>
-						<Box marginTop={5}>
+						<Box marginTop={2}>
 							<Box margin={1}>
 								<Text>Name:</Text>
 							</Box>

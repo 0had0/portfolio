@@ -63,7 +63,11 @@ function Menu() {
 				</a>
 			</Box>
 
-			<Button href="#" primary>
+			<Button
+				href="https://api.whatsapp.com/send?phone=96181841019"
+				target="__blank"
+				primary
+			>
 				Whatsapp
 			</Button>
 

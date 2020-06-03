@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Box, Spinner } from "gestalt";
+import { Box } from "gestalt";
+
 import ColoredBox from "../components/ui/ColoredBox";
 import Text from "../components/ui/Text";
 import { SpringAnimated } from "../components/ui/Animated";
@@ -10,8 +11,7 @@ import AppContext from "../contexts/appContext";
 import MrCarrot from "../images/blog.svg";
 
 function useFetch(url) {
-	const [data, setData] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [data, setData] = useState([{}, {}]);
 
 	const { state, dispatch } = useContext(AppContext);
 
@@ -35,7 +35,6 @@ function useFetch(url) {
 						} else console.log(result.message);
 					});
 			else setData(state.posts);
-			setLoading(false);
 		}
 		if (isMounted) getData();
 		return () => {
@@ -43,11 +42,11 @@ function useFetch(url) {
 		};
 		// eslint-disable-next-line
 	}, []);
-	return [data, loading];
+	return [data];
 }
 
 function Blog() {
-	const [posts, loading] = useFetch(`${process.env.REACT_APP_API}/posts`);
+	const [posts] = useFetch(`${process.env.REACT_APP_API}/posts`);
 	return (
 		<Box width="100%" display="flex" direction="column" alignItems="center">
 			<ColoredBox
@@ -96,12 +95,8 @@ function Blog() {
 					alignItems="center"
 					justifyContent="center"
 				>
-					{loading ? (
-						<Spinner accessibilityLabel="loading" show={loading} />
-					) : (
-						posts &&
-						posts.map((item, i) => <Post item={item} key={i} />)
-					)}
+					{posts &&
+						posts.map((item, i) => <Post item={item} key={i} />)}
 				</Box>
 			</ColoredBox>
 		</Box>
