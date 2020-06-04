@@ -13,7 +13,7 @@ import MrCarrot from "../images/blog.svg";
 function useFetch(url) {
 	const [data, setData] = useState([{}, {}]);
 
-	const { state, dispatch } = useContext(AppContext);
+	const { state, dispatch, _toggleError } = useContext(AppContext);
 
 	useEffect(() => {
 		let isMounted = true;
@@ -33,7 +33,8 @@ function useFetch(url) {
 							});
 							setData(result);
 						} else console.log(result.message);
-					});
+					})
+					.catch(() => _toggleError());
 			else setData(state.posts);
 		}
 		if (isMounted) getData();

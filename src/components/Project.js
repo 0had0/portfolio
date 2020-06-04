@@ -42,7 +42,7 @@ const Project = ({ item, ...props }) => {
 					>
 						{item.image?.url && fallback ? (
 							<img
-								src={`${process.env.REACT_APP_API}${item.image.url}`}
+								src={`${item.image.url}`}
 								onError={_onSrcError}
 								alt={item?.title}
 								width="auto"

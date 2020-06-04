@@ -8,6 +8,7 @@ import AppContext from "./contexts/appContext";
 import theme from "./components/theme";
 
 import Footer from "./components/Footer";
+import ErrorNotifier from "./components/ErrorNotifier";
 
 import WebFont from "webfontloader";
 
@@ -26,12 +27,18 @@ WebFont.load({
 const initialState = {
 	theme: theme,
 	posts: null,
+	error: false,
 };
 
 function App() {
 	const [state, dispatch] = useReducer(reducer, initialState);
+	const _toggleError = React.useCallback(
+		() => dispatch({ type: "toggle_error" }),
+		[]
+	);
 	return (
-		<AppContext.Provider value={{ state, dispatch }}>
+		<AppContext.Provider value={{ state, dispatch, _toggleError }}>
+			<ErrorNotifier error={state.error} toggleError={_toggleError} />
 			<Router />
 			<Footer />
 		</AppContext.Provider>

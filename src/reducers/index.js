@@ -6,6 +6,9 @@ export default (state, action) => {
 		case "add_posts": {
 			return { ...state, posts: [...action.payload] };
 		}
+		case "toggle_error": {
+			return { ...state, error: !state.error };
+		}
 		default: {
 			return state;
 		}

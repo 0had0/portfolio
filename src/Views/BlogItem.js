@@ -35,11 +35,14 @@ const Wrapper = styled.div`
 function BlogItem() {
 	let { id } = useParams();
 	const [item, setItem] = useState({});
+
 	const [error, setError] = useState(false);
-	const { state } = useContext(AppContext);
+	const { state, _toggleError } = useContext(AppContext);
+
 	const [name, setName] = useState("");
 	const [message, setMessage] = useState("");
 	const [value] = useState(false);
+
 	useEffect(() => {
 		let isMounted = true;
 		document.getElementsByTagName("meta")["theme-color"].content =
@@ -50,7 +53,8 @@ function BlogItem() {
 				.then((result) => {
 					if (!result?.error && !result?.statusCode) setItem(result);
 					else setError(true);
-				});
+				})
+				.catch(() => _toggleError());
 		}
 		if (isMounted) {
 			if (!state.posts) getData();
@@ -189,7 +193,7 @@ function BlogItem() {
 					>
 						{item?.image?.url ? (
 							<img
-								src={process.env.REACT_APP_API + item.image.url}
+								src={item.image.url}
 								height="100%"
 								width="auto"
 								alt={item.title}
@@ -361,7 +365,7 @@ function BlogItem() {
 					dark
 					width="100%"
 					height="100%"
-					padding={1}
+					padding={5}
 					display="flex"
 					direction="column"
 					alignItems="center"

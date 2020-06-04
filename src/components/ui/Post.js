@@ -57,7 +57,7 @@ function Post({ item }) {
 					{item?.image?.url ? (
 						<img
 							alt={item.title}
-							src={process.env.REACT_APP_API + item.image.url}
+							src={item.image.url}
 							height="100%"
 							width="auto"
 						/>

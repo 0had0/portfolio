@@ -10,8 +10,29 @@ import Social from "./Social";
 
 import MenuContext from "../contexts/menuContext";
 
+async function getLink(url, setLink) {
+	return await fetch(url)
+		.then((res) => res.json())
+		.then((result) => {
+			if (result?.link) setLink(result.link);
+			else console.log(result.message);
+		});
+}
+
+function useFetch(url) {
+	const [link, setLink] = React.useState(null);
+	React.useEffect(() => {
+		let isMounted = true;
+		if (isMounted && link === null) getLink(url, setLink);
+		return () => (isMounted = false);
+	}, [url]);
+	return [link];
+}
+
 function Menu() {
 	const context = useContext(MenuContext);
+	const [link] = useFetch(`${process.env.REACT_APP_API}/cvs/1`);
+
 	const { toggleMenu, toggle } = React.useMemo(
 		() => ({ toggleMenu: context.toggleMenu, toggle: context.toggle }),
 		[context.toggleMenu, context.toggle]
@@ -50,10 +71,7 @@ function Menu() {
 			</Text>
 
 			<Box opacity={1}>
-				<a
-					href={`${process.env.REACT_APP_API}/uploads/cv_b9d6083191.pdf`}
-					target="__blank"
-				>
+				<a href={link} target="__blank">
 					<Text primary>
 						<span role="img" aria-label="download">
 							📥

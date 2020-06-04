@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, TextField, TextArea, Spinner } from "gestalt";
+
 import ColoredBox from "../components/ui/ColoredBox";
 import Text from "../components/ui/Text";
+
+import AppContext from "../contexts/appContext";
 
 function Contact() {
 	const [email, setEmail] = useState("");
@@ -10,6 +13,8 @@ function Contact() {
 	const [loading, setLoading] = useState(false);
 	const [value, setValue] = useState(false);
 	const [sent, setSent] = useState(false);
+
+	const { _toggleError } = React.useContext(AppContext);
 
 	useEffect(() => {
 		if (sent) setTimeout(() => setSent(false), 1000);
@@ -43,7 +48,8 @@ function Contact() {
 				setSent(true);
 			})
 			.catch((error) => {
-				console.log(error);
+				setLoading(false);
+				_toggleError();
 			});
 	};
 

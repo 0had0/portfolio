@@ -7,18 +7,22 @@ import ColoredBox from "../components/ui/ColoredBox";
 import Project from "../components/Project";
 import { SpringAnimatedImage, SpringAnimated } from "../components/ui/Animated";
 
+import AppContext from "../contexts/appContext";
+
 import me from "../images/me.jpg";
 import me2 from "../images/0had0.svg";
 
 function useFetch(url) {
 	const [data, setData] = useState([{}, {}, {}]);
+	const { _toggleError } = React.useContext(AppContext);
+
 	useEffect(() => {
 		let isMounted = true;
 		async function getData() {
 			await fetch(url)
 				.then((res) => res.json())
 				.then((result) => setData(result))
-				.catch((err) => console.log(err));
+				.catch((err) => _toggleError());
 		}
 		if (isMounted) {
 			getData();
